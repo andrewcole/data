@@ -1,7 +1,9 @@
 FROM docker.io/library/node:latest
 
-RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64
-RUN chmod +x /usr/local/bin/dumb-init
+RUN \
+    wget -q -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64 \
+  && \
+    chmod +x /usr/local/bin/dumb-init
 
 WORKDIR /data
 ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
