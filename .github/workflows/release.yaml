@@ -1,0 +1,26 @@
+---
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: "0"
+    - env:
+        GITHUB_TOKEN: ${{ secrets.PAT }}
+        WITH_V: true
+      id: version
+      name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.67.0
+    - env:
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}
+      name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ steps.version.outputs.new_tag }}
+name: Release
+on:
+  push:
+    branches:
+    - master

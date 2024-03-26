@@ -1,0 +1,26 @@
+---
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: "0"
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    - name: Build
+      uses: docker/build-push-action@v5
+      with:
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        context: .
+        platforms: linux/amd64
+        push: false
+name: Test Development Build
+on:
+  pull_request:
+    branches:
+    - development
+    - master
