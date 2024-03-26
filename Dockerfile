@@ -1,4 +1,4 @@
-FROM docker.io/library/node:latest
+FROM docker.io/library/node:21.7.1
 
 RUN \
     wget -q -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64 \
