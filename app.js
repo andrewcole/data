@@ -6,16 +6,15 @@ import * as fs from 'fs';
 const app = express();
 const hostname = "0.0.0.0";
 const port = 39919;
-const rpt = 
 
 app.get("/.well-known/teapot", (req, res) => {
-    // HTTP I'm a teapot
     res.status(418).send("I'm a teapot");
 });
 
-["rptlog","galog"].forEach(element => {
-    console.log(`Serving graphql from ./json/${element}.json at /.well-known/graphql/${element}`);
-    app.use(`/.well-known/graphql/${element}`, jsonGraphqlExpress.default(JSON.parse(fs.readFileSync(`./json/${element}.json`))));
+var files = fs.readdirSync('./json').filter(fn => fn.endsWith('.json'));
+files.forEach(element => {
+    console.log(`Serving graphql from ./json/${element} at /.well-known/graphql/${element.replace(/.json$/,'')}`);
+    app.use(`/.well-known/graphql/${element.replace(/.json$/,'')}`, jsonGraphqlExpress.default(JSON.parse(fs.readFileSync(`./json/${element}`))));
 });
 
 ["html"].forEach(element => {
