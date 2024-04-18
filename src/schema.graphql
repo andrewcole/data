@@ -3,7 +3,7 @@
 type Query {
   "Returns a list of GA flights"
   gaFlights(
-    "The cursor to start from. If null or a non-existant cursor is provided, the first page will be returned."
+    "The cursor to start from. If null or a non-existent cursor is provided, the first page will be returned."
     cursor: String
     "The maximum number of GA flights to return per page. If not provided, 10 GA flights will be returned."
     limit: Int
@@ -13,7 +13,7 @@ type Query {
   rptTrips(
     "Filter RPT trips by name. If not provided, no filtering will be applied."
     search: String
-    "The cursor to start from. If null or a non-existant cursor is provided, the first page will be returned."
+    "The cursor to start from. If null or a non-existent cursor is provided, the first page will be returned."
     cursor: String
     "The maximum number of RPT trips to return per page. If not provided, 10 RPT trips will be returned."
     limit: Int
@@ -23,7 +23,7 @@ type Query {
   rptFlights(
     "Filter RPT flights by flight number. If not provided, no filtering will be applied."
     search: String
-    "The cursor to start from. If null or a non-existant cursor is provided, the first page will be returned."
+    "The cursor to start from. If null or a non-existent cursor is provided, the first page will be returned."
     cursor: String
     "The maximum number of RPT flights to return per page. If not provided, 10 RPT flights will be returned."
     limit: Int

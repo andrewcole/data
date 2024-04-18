@@ -27,6 +27,7 @@ jobs:
         exclude: |
           */*.min.css
           */*.svg
+          */*.csv
         fail_on_error: "true"
         filter_mode: nofilter
     - uses: reviewdog/action-suggester@v1
