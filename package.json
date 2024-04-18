@@ -1,16 +1,30 @@
 {
-  "name": "coleyflights",
+  "name": "data-graphql-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "schema": "cp ./src/schema.graphql ./dist/schema.graphql",
+    "static": "cp -r ./src/static ./dist/static",
+    "start": "node ./dist/index.js"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server": "^4.10.2",
+    "cors": "^2.8.5",
+    "csv": "^6.3.8",
     "express": "^4.19.2",
-    "json-graphql-server": "^2.3.2"
+    "geodesy": "^2.4.0",
+    "graphql": "^16.8.1",
+    "morgan": "^1.10.0",
+    "yargs": "^17.7.2"
   },
-  "type": "module"
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
+  }
 }
