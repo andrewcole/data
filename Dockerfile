@@ -38,7 +38,10 @@ RUN \
 FROM base AS final
 
 # Install dumb-init
-RUN apt-get update && apt-get install -y dumb-init
+RUN \
+    wget -q -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64 \
+  && \
+    chmod +x /usr/local/bin/dumb-init
 
 # Install data
 COPY --from=data /app/dist /app/dist
