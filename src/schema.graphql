@@ -1,0 +1,217 @@
+#graphql
+"The root query type"
+type Query {
+  "Returns a list of GA flights"
+  gaFlights(
+    "The cursor to start from. If null or a non-existent cursor is provided, the first page will be returned."
+    cursor: String
+    "The maximum number of GA flights to return per page. If not provided, 10 GA flights will be returned."
+    limit: Int
+  ): GAFlightResult!
+
+  "Returns a list of RPT trips"
+  rptTrips(
+    "Filter RPT trips by name. If not provided, no filtering will be applied."
+    search: String
+    "The cursor to start from. If null or a non-existent cursor is provided, the first page will be returned."
+    cursor: String
+    "The maximum number of RPT trips to return per page. If not provided, 10 RPT trips will be returned."
+    limit: Int
+  ): RPTTripResult!
+
+  "Returns a list of RPT flights"
+  rptFlights(
+    "Filter RPT flights by flight number. If not provided, no filtering will be applied."
+    search: String
+    "The cursor to start from. If null or a non-existent cursor is provided, the first page will be returned."
+    cursor: String
+    "The maximum number of RPT flights to return per page. If not provided, 10 RPT flights will be returned."
+    limit: Int
+  ): RPTFlightResult!
+}
+
+"A list of GA flights with a cursor and count"
+type GAFlightResult {
+  "A list of GA flights"
+  data: [GAFlight]
+  "A cursor to the next page of GA flights"
+  cursor: String
+  "The total number of GA flights"
+  count: Int
+}
+
+"A list of RPT trips with a cursor and count"
+type RPTTripResult {
+  "A list of RPT trips"
+  data: [RPTTrip]
+  "A cursor to the next page of RPT trips"
+  cursor: String
+  "The total number of RPT trips"
+  count: Int
+}
+
+"A list of RPT flights with a cursor and count"
+type RPTFlightResult {
+  "A list of RPT flights"
+  data: [RPTFlight]
+  "A cursor to the next page of RPT flights"
+  cursor: String
+  "The total number of RPT flights"
+  count: Int
+}
+
+"A list of routes with a cursor and count"
+type RouteResult {
+  "A list of routes"
+  data: [Route]
+  "A cursor to the next page of routes"
+  cursor: String
+  "The total number of routes"
+  count: Int
+}
+
+"A list of airports with a cursor and count"
+type AirportResult {
+  "A list of airports"
+  data: [Airport]
+  "A cursor to the next page of airports"
+  cursor: String
+  "The total number of airports"
+  count: Int
+}
+
+"A list of timezones with a cursor and count"
+type TimeZoneResult {
+  "A list of timezones"
+  data: [TimeZone]
+  "A cursor to the next page of timezones"
+  cursor: String
+  "The total number of timezones"
+  count: Int
+}
+
+"A list of cities with a cursor and count"
+type CityResult {
+  "A list of cities"
+  data: [City]
+  "A cursor to the next page of cities"
+  cursor: String
+  "The total number of cities"
+  count: Int
+}
+
+"A list of countries with a cursor and count"
+type CountryResult {
+  "A list of countries"
+  data: [Country]
+  "A cursor to the next page of countries"
+  cursor: String
+  "The total number of countries"
+  count: Int
+}
+
+"A GA flight"
+type GAFlight {
+  id: String!
+  date: String!
+  type: String!
+  reg: String!
+  pic: String!
+  crew: String!
+  route: String!
+  details: String!
+  blog_link: String
+  photos_link: String
+  singleengine_dual: Float
+  singleengine_command: Float
+  instrument_simulator: Float
+}
+
+"A RPT trip consisting of RPT flights"
+type RPTTrip {
+  "The unique identifier for the RPT trip"
+  id: ID!
+  "The name of the RPT trip"
+  name: String!
+  "The RPT flights that make up the RPT trip"
+  rptFlights(cursor: String, limit: Int): RPTFlightResult!
+}
+
+type RPTFlight {
+  "The unique identifier for the RPT flight"
+  id: ID!
+  "The RPT trip the RPT flight is part of"
+  rptTrip: RPTTrip!
+  "The flight number"
+  flight: String!
+  "The route the RPT flight operates on"
+  route: Route!
+  "The departure time of the RPT flight"
+  departure: String!
+  "The arrival time of the RPT flight"
+  arrival: String!
+  "The aircraft operating the RPT flight"
+  registration: String
+  "The aircraft type"
+  type: String
+}
+
+"A route consisting of two or more airports"
+type Route {
+  "The unique identifier for the route"
+  id: ID!
+  "A friendly display string for the route"
+  name: String!
+  "The airports that make up the route"
+  airports: [Airport!]!
+  "The distance between the two airports in kilometres"
+  distance: Float!
+}
+
+"An airport"
+type Airport {
+  "The unique identifier for the airport"
+  id: ID!
+  "The name of the airport"
+  name: String!
+  "The city the airport is in"
+  city: City!
+  "The IATA code for the airport"
+  iata: String
+  "The ICAO code for the airport"
+  icao: String!
+  "The latitude of the airport"
+  latitude: Float!
+  "The longitude of the airport"
+  longitude: Float!
+  "The altitude of the airport in metres"
+  altitude: Int
+  "The timezone of the airport"
+  timeZone: TimeZone!
+}
+
+"A time zone"
+type TimeZone {
+  "The unique identifier for the timezone"
+  id: ID!
+  "The name of the timezone"
+  name: String!
+}
+
+"A city"
+type City {
+  "The unique identifier for the city"
+  id: ID!
+  "The name of the city"
+  name: String!
+  "The country the city is in"
+  country: Country!
+}
+
+"A country"
+type Country {
+  "The unique identifier for the country"
+  id: ID!
+  "The name of the country"
+  name: String!
+}
