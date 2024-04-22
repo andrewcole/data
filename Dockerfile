@@ -53,7 +53,7 @@ COPY --from=build /app/dist /app/dist
 EXPOSE 4000
 # 
 # Use dumb-init as the entrypoint
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
 
 # Set the command to start the application
 CMD ["npm", "start"]
