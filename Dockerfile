@@ -1,5 +1,5 @@
 # Use the official Nodejs image as the base
-FROM docker.io/library/node:21.7.3 AS base
+FROM docker.io/library/node:22.3.0 AS base
 
 # Set the working directory inside the container
 WORKDIR /app
